@@ -15,6 +15,9 @@
 		D576D18127DA3E86007D1970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D576D18027DA3E86007D1970 /* Assets.xcassets */; };
 		D576D18427DA3E86007D1970 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D576D18227DA3E86007D1970 /* LaunchScreen.storyboard */; };
 		D576D18C27DA41A2007D1970 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576D18B27DA41A2007D1970 /* HabitsStore.swift */; };
+		D576D18E27DA433B007D1970 /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576D18D27DA433B007D1970 /* HabitsViewController.swift */; };
+		D576D19027DA4350007D1970 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576D18F27DA4350007D1970 /* InfoViewController.swift */; };
+		D576D19227DA4405007D1970 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576D19127DA4405007D1970 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		D576D18327DA3E86007D1970 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D576D18527DA3E86007D1970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D576D18B27DA41A2007D1970 /* HabitsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
+		D576D18D27DA433B007D1970 /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
+		D576D18F27DA4350007D1970 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		D576D19127DA4405007D1970 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,9 @@
 			children = (
 				D576D18B27DA41A2007D1970 /* HabitsStore.swift */,
 				D576D17427DA3E82007D1970 /* AppDelegate.swift */,
+				D576D19127DA4405007D1970 /* Constants.swift */,
+				D576D18D27DA433B007D1970 /* HabitsViewController.swift */,
+				D576D18F27DA4350007D1970 /* InfoViewController.swift */,
 				D576D17627DA3E82007D1970 /* SceneDelegate.swift */,
 				D576D17827DA3E82007D1970 /* ViewController.swift */,
 				D576D17A27DA3E82007D1970 /* Main.storyboard */,
@@ -145,10 +154,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D576D17927DA3E82007D1970 /* ViewController.swift in Sources */,
+				D576D18E27DA433B007D1970 /* HabitsViewController.swift in Sources */,
 				D576D17527DA3E82007D1970 /* AppDelegate.swift in Sources */,
+				D576D19027DA4350007D1970 /* InfoViewController.swift in Sources */,
 				D576D17F27DA3E82007D1970 /* MyHabits.xcdatamodeld in Sources */,
 				D576D18C27DA41A2007D1970 /* HabitsStore.swift in Sources */,
 				D576D17727DA3E82007D1970 /* SceneDelegate.swift in Sources */,
+				D576D19227DA4405007D1970 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +237,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -280,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
