@@ -9,11 +9,8 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-
-    
     private lazy var infoScrollView: UIScrollView = {
-        let scrollVIew = UIScrollView()
-        scrollVIew.toAutoLayout()
+        let scrollVIew = UIScrollView(frame: self.view.bounds)
         return scrollVIew
     }()
     
@@ -36,56 +33,40 @@ class InfoViewController: UIViewController {
     private lazy var informationTextView: UITextView = {
         let textView = UITextView()
         textView.toAutoLayout()
-
-        
         textView.text = InfoDescription.placeholder
         textView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         textView.textColor = .black
-
-//        textView.isScrollEnabled = true
+        textView.isScrollEnabled = false
         return textView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupContentViews()
-    }
-
-    private func setupContentViews() {
-
         view.addSubview(infoScrollView)
         infoScrollView.addSubview(contentView)
+        infoScrollView.contentSize = self.informationTextView.bounds.size
         contentView.addSubviews(informationTitle, informationTextView)
         setupConstraints()
         self.loadViewIfNeeded()
     }
     
-
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-        
-            infoScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            infoScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            infoScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            infoScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-
             contentView.topAnchor.constraint(equalTo: infoScrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: infoScrollView.trailingAnchor),
             contentView.centerXAnchor.constraint(equalTo: infoScrollView.centerXAnchor),
             contentView.centerYAnchor.constraint(equalTo: infoScrollView.centerYAnchor),
-
-            informationTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22),
+            
+            informationTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             informationTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-
-            informationTextView.topAnchor.constraint(equalTo: informationTitle.bottomAnchor, constant: 22),
+            
+            informationTextView.topAnchor.constraint(equalTo: informationTitle.bottomAnchor),
             informationTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             informationTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             informationTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-
-
         ])
     }
-
 }
