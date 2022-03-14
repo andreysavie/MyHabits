@@ -20,11 +20,11 @@ class InfoViewController: UIViewController {
         return contentView
     }()
     
-    
     private lazy var informationTitle: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
         label.text = "Привычка за 21 день"
+        label.numberOfLines = 1
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return label
@@ -50,7 +50,6 @@ class InfoViewController: UIViewController {
         self.loadViewIfNeeded()
     }
     
-    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: infoScrollView.topAnchor),
@@ -62,7 +61,9 @@ class InfoViewController: UIViewController {
             
             informationTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             informationTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
+            informationTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            informationTitle.heightAnchor.constraint(equalToConstant: 40),
+
             informationTextView.topAnchor.constraint(equalTo: informationTitle.bottomAnchor),
             informationTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             informationTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),

@@ -9,6 +9,8 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    var habit: Habit?
+    
     private lazy var habitNameLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
@@ -39,25 +41,36 @@ class HabitCollectionViewCell: UICollectionViewCell {
         button.toAutoLayout()
         button.setImage(UIImage(systemName: "checkmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
         button.tintColor = .green
+        button.addTarget(self, action: #selector(tapOnChecker), for: .touchUpInside)
         return button
     }()
     
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        setupContent()
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 8
+        contentView.addSubviews(habitNameLabel, habitSelectedTimeLabel, habitCounter, checker)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupContent() {
-        contentView.addSubview(habitNameLabel)
-        contentView.addSubview(habitSelectedTimeLabel)
-        contentView.addSubview(habitCounter)
-        contentView.addSubview(checker)
+    public func setConfigureOfCell(habit: Habit) {
+        self.habit = habit
+        habitNameLabel.text = habit.name
+        habitNameLabel.textColor = habit.color
+        habitSelectedTimeLabel.text = habit.dateString
+        checker.tintColor = habit.color
+        habitCounter.text = "Счётчик: " + String(habit.trackDates.count)
+        
+        if habit.isAlreadyTakenToday == true {
+            checker.setImage(UIImage(systemName: "checkmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
+            checker.isUserInteractionEnabled = false
+        } else {
+            self.checker.setImage(UIImage(systemName: "circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
+            checker.isUserInteractionEnabled = true
+        }
         setupConstraints()
     }
     
@@ -79,13 +92,11 @@ class HabitCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    public func setConfigureOfCell(habit: Habit) {
-        
-        self.habitNameLabel.text = habit.name
-        self.habitNameLabel.textColor = habit.color
-        self.habitSelectedTimeLabel.text = habit.dateString
-        self.checker.tintColor = habit.color
-        self.habitCounter.text = "Счётчик: " + String(habit.trackDates.count)
-    }
+
     
+    @objc func tapOnChecker() {
+        guard let trackedHabit = habit else { return }
+            HabitsStore.shared.track(trackedHabit)
+            HabitsViewController.collectionView.reloadData()
+        }
 }

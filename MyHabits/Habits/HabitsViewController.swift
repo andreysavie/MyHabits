@@ -11,7 +11,7 @@ class HabitsViewController: UIViewController {
     
     let store = HabitsStore.shared
     
-    private lazy var layout: UICollectionViewFlowLayout = {
+    static var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 12
         layout.scrollDirection = .vertical
@@ -19,12 +19,12 @@ class HabitsViewController: UIViewController {
         return layout
     }()
     
-    private lazy var collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    static var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: HabitsViewController.layout)
         collection.backgroundColor = Colors.lightGrayColor
         collection.toAutoLayout()
-        collection.dataSource = self
-        collection.delegate = self
+//        collection.dataSource = self
+//        collection.delegate = self
         collection.register(
             HabitCollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: HabitCollectionViewCell.self))
@@ -45,20 +45,25 @@ class HabitsViewController: UIViewController {
         
         rightBarButtonItem.tintColor = Colors.purpleColor
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        HabitsViewController.collectionView.dataSource = self
+        HabitsViewController.collectionView.delegate = self
+
         setupContent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.collectionView.reloadData()
+        HabitsViewController.collectionView.reloadData()
     }
+
     
     private func setupContent() {
-        view.addSubview(collectionView)
+        view.addSubview(HabitsViewController.collectionView)
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            HabitsViewController.collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            HabitsViewController.collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            HabitsViewController.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            HabitsViewController.collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -91,6 +96,7 @@ extension HabitsViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProgressCollectionViewCell.self), for: indexPath) as? ProgressCollectionViewCell else { return UICollectionViewCell() }
+            cell.setupContent()
             return cell
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as? HabitCollectionViewCell else { return UICollectionViewCell() }
