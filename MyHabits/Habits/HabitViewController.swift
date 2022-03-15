@@ -12,6 +12,8 @@ class HabitViewController: UIViewController, UITextFieldDelegate{
     
     // MARK: PROPERTIES ============================================================================
 
+    var habit: Habit?
+    
     private let rightBarButtonItem = UIBarButtonItem(
         title: "Сохранить",
         style: .plain ,
@@ -114,11 +116,24 @@ class HabitViewController: UIViewController, UITextFieldDelegate{
         button.backgroundColor = .clear
         button.setTitle("Удалить привычку", for: .normal)
         button.setTitleColor(.systemRed, for: .normal)
-        button.addTarget(self, action: #selector(deleteHabit), for: .touchUpInside)
+        button.addTarget(self, action: #selector(removeHabit), for: .touchUpInside)
+//        button.isHidden = true
         return button
     }()
     
     // MARK: INITIALIZATORS ============================================================================
+    
+//    init(habitName: String, habitColor: UIColor, habitTime: Date) {
+//        super.init(nibName: nil, bundle: nil)
+//
+//        self.habitNameTextField.text = habitName
+//        self.habitColorPicker.backgroundColor = habitColor
+//        self.habitSelectedTime.text = habit?.dateString
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +170,16 @@ class HabitViewController: UIViewController, UITextFieldDelegate{
     
     // MARK: METHODS ============================================================================
     
+    // ТЕСТ!!!
+    public func setConfigureOfViewController(habit: Habit) {
+        self.habit = habit
+        self.habitNameTextField.text = habit.name
+        self.habitColorPicker.backgroundColor = habit.color
+        self.date = habit.date
+        self.habitSelectedTime.text = "Каждый день в "
+        self.timePicker.date = habit.date
+    }
+    
     private func setupContent() {
         view.addSubview(habitScrollView)
         habitScrollView.addSubview(habitContentView)
@@ -174,7 +199,6 @@ class HabitViewController: UIViewController, UITextFieldDelegate{
         return label
     }
     
-    // Возможно не работает
     @objc func timeChanged () {
         self.view.layoutIfNeeded()
     }
@@ -188,7 +212,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate{
         navigationController?.popToRootViewController(animated: true)
     }
     
-    @objc func deleteHabit(sender: UIButton!) {
+    @objc func removeHabit(sender: UIButton!) {
         
         let alertController = UIAlertController(
             title: "Удалить привычку",
@@ -197,10 +221,12 @@ class HabitViewController: UIViewController, UITextFieldDelegate{
         
         let acceptAction = UIAlertAction(title: "Отмена", style: .default) { (_) -> Void in }
         let declineAction = UIAlertAction(title: "Удалить", style: .destructive) { (_) -> Void in
-            
-            print("very sad :(") // задать действие!!!
+            if let removingHabit = self.habit {
+                HabitsStore.shared.habits.removeAll(where: {$0 == removingHabit})
+                HabitsViewController.collectionView.reloadData()
+            }
+            self.navigationController?.popToRootViewController(animated: true)
         }
-        
         alertController.addAction(acceptAction)
         alertController.addAction(declineAction)
         present(alertController, animated: true, completion: nil)

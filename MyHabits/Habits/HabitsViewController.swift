@@ -11,6 +11,8 @@ class HabitsViewController: UIViewController {
     
     let store = HabitsStore.shared
     
+    var habit: Habit?
+    
     static var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 12
@@ -23,8 +25,6 @@ class HabitsViewController: UIViewController {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: HabitsViewController.layout)
         collection.backgroundColor = Colors.lightGrayColor
         collection.toAutoLayout()
-//        collection.dataSource = self
-//        collection.delegate = self
         collection.register(
             HabitCollectionViewCell.self,
             forCellWithReuseIdentifier: String(describing: HabitCollectionViewCell.self))
@@ -105,6 +105,22 @@ extension HabitsViewController: UICollectionViewDataSource {
         default:
             return UICollectionViewCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+//        let habitDetailsViewController = HabitDetailsViewController()
+        let habitViewController = HabitViewController()
+        
+        let selectedHabit = store.habits[indexPath.row]
+        
+        habitViewController.setConfigureOfViewController(habit: selectedHabit)
+        
+        
+        navigationController?.pushViewController(habitViewController, animated: true)
+//        navigationController?.pushViewController(habitDetailsViewController, animated: true)
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
