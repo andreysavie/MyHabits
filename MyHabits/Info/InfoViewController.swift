@@ -9,6 +9,8 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
+    // MARK: PROPERTIES ============================================================================
+
     private lazy var infoScrollView: UIScrollView = {
         let scrollVIew = UIScrollView(frame: self.view.bounds)
         return scrollVIew
@@ -39,7 +41,9 @@ class InfoViewController: UIViewController {
         textView.isScrollEnabled = false
         return textView
     }()
-    
+ 
+    // MARK: INITIALIZATORS ============================================================================
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(infoScrollView)
@@ -50,6 +54,8 @@ class InfoViewController: UIViewController {
         self.loadViewIfNeeded()
     }
     
+    // MARK: METHODS ===================================================================================
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: infoScrollView.topAnchor),
@@ -59,14 +65,14 @@ class InfoViewController: UIViewController {
             contentView.centerXAnchor.constraint(equalTo: infoScrollView.centerXAnchor),
             contentView.centerYAnchor.constraint(equalTo: infoScrollView.centerYAnchor),
             
-            informationTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            informationTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            informationTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            informationTitle.heightAnchor.constraint(equalToConstant: 40),
+            informationTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.leadingMargin),
+            informationTitle.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            informationTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
+            informationTitle.heightAnchor.constraint(equalToConstant: Constants.heightOfInformationTitle),
 
             informationTextView.topAnchor.constraint(equalTo: informationTitle.bottomAnchor),
-            informationTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            informationTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            informationTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            informationTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             informationTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }

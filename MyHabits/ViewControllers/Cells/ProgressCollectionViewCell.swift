@@ -9,6 +9,8 @@ import UIKit
 
 class ProgressCollectionViewCell: UICollectionViewCell {
    
+    // MARK: PROPERTIES ================================================================================
+
     private lazy var progressNameLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
@@ -28,7 +30,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
 
         return label
     }()
-
     
     private lazy var progressLine: UIProgressView = {
         let progress = UIProgressView(progressViewStyle: .bar )
@@ -43,6 +44,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         return progress
     }()
 
+    // MARK: INITIALIZATORS ============================================================================
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.backgroundColor = .white
@@ -53,6 +56,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: METHODS ===================================================================================
+
     func setupContent() {
         contentView.addSubviews(progressNameLabel, progressProcentLabel, progressLine)
         progressLine.progress = HabitsStore.shared.todayProgress
@@ -62,17 +67,16 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            progressNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            progressNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            progressNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indent),
+            progressNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
             
-            progressProcentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            progressProcentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            progressProcentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indent),
+            progressProcentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
 
-            progressLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            progressLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            progressLine.topAnchor.constraint(equalTo: progressNameLabel.bottomAnchor, constant: 10),
-            progressLine.heightAnchor.constraint(equalToConstant: 7),
-            
+            progressLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indent),
+            progressLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indent),
+            progressLine.topAnchor.constraint(equalTo: progressNameLabel.bottomAnchor, constant: Constants.indent),
+            progressLine.heightAnchor.constraint(equalToConstant: Constants.indent / 2),
         ])
     }
 }

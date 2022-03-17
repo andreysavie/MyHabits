@@ -9,6 +9,8 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    // MARK: PROPERTIES ============================================================================
+
     var habit: Habit?
     
     private lazy var habitNameLabel: UILabel = {
@@ -45,7 +47,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    
+    // MARK: INITIALIZATORS ============================================================================
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.backgroundColor = .white
@@ -56,6 +59,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: METHODS ===================================================================================
+
     public func setConfigureOfCell(habit: Habit) {
         self.habit = habit
         habitNameLabel.text = habit.name
@@ -91,8 +96,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
             checker.heightAnchor.constraint(equalToConstant: 36),
         ])
     }
-    
-
     
     @objc func tapOnChecker() {
         guard let trackedHabit = habit else { return }

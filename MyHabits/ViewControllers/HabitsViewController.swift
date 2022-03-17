@@ -9,6 +9,8 @@ import UIKit
 
 class HabitsViewController: UIViewController {
     
+    // MARK: PROPERTIES ============================================================================
+
     let store = HabitsStore.shared
     
     var habit: Habit?
@@ -33,22 +35,20 @@ class HabitsViewController: UIViewController {
             forCellWithReuseIdentifier: String(describing: ProgressCollectionViewCell.self))
         return collection
     }()
-    
+   
+    // MARK: INITIALIZATORS ============================================================================
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "plus"),
             style: .plain ,
             target: self,
             action: #selector(addNewHabbit))
-        
         rightBarButtonItem.tintColor = Colors.purpleColor
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        
         HabitsViewController.collectionView.dataSource = self
         HabitsViewController.collectionView.delegate = self
-
         setupContent()
     }
     
@@ -56,7 +56,8 @@ class HabitsViewController: UIViewController {
         HabitsViewController.collectionView.reloadData()
     }
 
-    
+    // MARK: METHODS ===================================================================================
+
     private func setupContent() {
         view.addSubview(HabitsViewController.collectionView)
         NSLayoutConstraint.activate([
@@ -68,8 +69,7 @@ class HabitsViewController: UIViewController {
     }
     
     @objc func addNewHabbit() {
-        let habitViewCintroller = HabitViewController()
-        navigationController?.pushViewController(habitViewCintroller, animated: true)
+        navigationController?.pushViewController(HabitViewController(nil), animated: true)
     }
 }
 
@@ -109,18 +109,10 @@ extension HabitsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        let habitDetailsViewController = HabitDetailsViewController()
-        let habitViewController = HabitViewController()
-        
-        let selectedHabit = store.habits[indexPath.row]
-        
-        habitViewController.setConfigureOfViewController(habit: selectedHabit)
-        
-        
-        navigationController?.pushViewController(habitViewController, animated: true)
-//        navigationController?.pushViewController(habitDetailsViewController, animated: true)
-        
-        collectionView.deselectItem(at: indexPath, animated: true)
+        guard indexPath != [0,0] else { return }
+            let habitDetailsViewController = HabitDetailsViewController(HabitsStore.shared.habits[indexPath.row])
+            navigationController?.pushViewController(habitDetailsViewController, animated: true)
+            collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 

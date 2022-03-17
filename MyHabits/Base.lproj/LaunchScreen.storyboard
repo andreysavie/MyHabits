@@ -24,7 +24,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyHabits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdX-Q0-Jqy">
-                                <rect key="frame" x="165" y="788" width="88" height="24"/>
+                                <rect key="frame" x="163" y="788" width="88" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" systemColor="systemPurpleColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,10 +33,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="SdX-Q0-Jqy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Aqm-j9-ode"/>
                             <constraint firstItem="SdX-Q0-Jqy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OR0-82-1M0"/>
                             <constraint firstItem="kV0-AP-jaW" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ePg-Vy-XqI"/>
                             <constraint firstItem="kV0-AP-jaW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mZV-Ke-HNX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SdX-Q0-Jqy" secondAttribute="trailing" constant="161" id="pL0-xo-pqJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SdX-Q0-Jqy" secondAttribute="bottom" constant="50" id="suQ-vr-REv"/>
                         </constraints>
                     </view>
