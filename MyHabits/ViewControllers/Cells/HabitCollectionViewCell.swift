@@ -17,7 +17,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = Fonts.headlineFont
         return label
     }()
     
@@ -26,7 +26,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         label.toAutoLayout()
         label.textAlignment = .left
         label.textColor = .systemGray2
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = Fonts.captionFont
         return label
     }()
     
@@ -35,7 +35,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         label.toAutoLayout()
         label.textAlignment = .left
         label.textColor = .systemGray
-        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.font = Fonts.footnoteFont
         return label
     }()
     private lazy var checker: UIButton = {

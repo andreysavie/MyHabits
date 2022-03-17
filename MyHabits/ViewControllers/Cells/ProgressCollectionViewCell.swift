@@ -15,19 +15,17 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.textColor = .systemGray
-        label.text = "Всё получится!"
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-
+        label.text = Labels.motivation
+        label.font = Fonts.footnoteFont
         return label
     }()
     
     private lazy var progressProcentLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.font = Fonts.footnoteFont
         label.textColor = .systemGray
         label.text = "50%"
-
         return label
     }()
     

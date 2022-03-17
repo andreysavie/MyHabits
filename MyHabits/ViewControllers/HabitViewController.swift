@@ -15,24 +15,10 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     var habit: Habit?
     var habitName: String = ""
     
-    let rightBarButtonItem = UIBarButtonItem(
-       title: "Сохранить",
-       style: .plain ,
-       target: self,
-       action: #selector(saveHabit)
-   )
-    
-    private var date: Date = Date() {
-        didSet {
-            let dateformat = DateFormatter()
-            dateformat.dateFormat = "HH:mm a"
-            dateValue.text = dateformat.string(from: date)
-        }
-    }
     //MARK: LABELS
-    private lazy var habitNameTitleLabel = habitLabel("НАЗВАНИЕ")
-    private lazy var habitColorTitleLabel = habitLabel("ЦВЕТ")
-    private lazy var habitTimeTitleLabel = habitLabel("ВРЕМЯ")
+    private lazy var habitNameTitleLabel = habitLabel(Labels.nameLabel)
+    private lazy var habitColorTitleLabel = habitLabel(Labels.colorLabel)
+    private lazy var habitTimeTitleLabel = habitLabel(Labels.timeLabel)
     
     private lazy var habitScrollView: UIScrollView = {
         let scrollVIew = UIScrollView(frame: self.view.bounds)
@@ -51,31 +37,19 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     private lazy var habitSelectedTime: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.text = "Каждый день в"
+        label.text = habit?.dateString
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = Fonts.bodyFont
         return label
     }()
-    
-    private lazy var dateValue: UILabel = {
-        let label = UILabel()
-        label.toAutoLayout()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        label.textColor = .black
-        label.numberOfLines = 1
-        let dateformat = DateFormatter()
-        dateformat.dateFormat = "HH:mm a"
-        label.text = dateformat.string(from: timePicker.date)
-        return label
-    }()
-    
+        
     //MARK: Set habit name textFIeld
     private lazy var habitNameTextField: UITextField = {
         let textField = UITextField()
         textField.toAutoLayout()
         textField.backgroundColor = .clear
-        textField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
-        textField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        textField.placeholder = Labels.habitNamePlaceholder
+        textField.font = Fonts.bodyFont
         textField.textColor = .black
         textField.autocorrectionType = UITextAutocorrectionType.yes
         textField.keyboardType = UIKeyboardType.default
@@ -100,7 +74,6 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     private lazy var timePicker: UIDatePicker = {
         let timePicker = UIDatePicker()
         timePicker.toAutoLayout()
-        timePicker.date = date
         timePicker.backgroundColor = .white.withAlphaComponent(0.9)
         timePicker.datePickerMode = .time
         timePicker.preferredDatePickerStyle = .wheels
@@ -126,7 +99,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         if let habitSource = habit {
             habitNameTextField.text = habitSource.name
             habitColorPicker.backgroundColor = habitSource.color
-            date = habitSource.date
+            timePicker.date = habitSource.date
             deleteHabitButton.isHidden = false
         } else {
             deleteHabitButton.isHidden = true
@@ -140,16 +113,21 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         habitNameTextField.delegate = self
-        title = "Создать"
+        title = Labels.createLabel
         view.backgroundColor = .white
         
         let leftBarButtonItem = UIBarButtonItem(
-            title: "Отменить",
+            title: Labels.cancelLabel,
             style: .plain,
             target: self,
             action: #selector(cancelHabit)
         )
-                
+        let rightBarButtonItem = UIBarButtonItem(
+            title: Labels.saveLabel,
+            style: .plain ,
+            target: self,
+            action: #selector(saveHabit)
+        )
         leftBarButtonItem.tintColor = Colors.purpleColor
         leftBarButtonItem.isEnabled = true
         navigationItem.leftBarButtonItem = leftBarButtonItem
@@ -181,8 +159,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         self.habit = habit
         self.habitNameTextField.text = habit.name
         self.habitColorPicker.backgroundColor = habit.color
-        self.date = habit.date
-        self.habitSelectedTime.text = "Каждый день в "
+        self.habitSelectedTime.text = habit.dateString
         self.timePicker.date = habit.date
     }
     
@@ -190,21 +167,20 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(habitScrollView)
         habitScrollView.addSubview(habitContentView)
         habitScrollView.contentSize = self.habitContentView.bounds.size
-        habitContentView.addSubviews(habitNameTitleLabel, habitNameTextField, habitColorTitleLabel, habitColorPicker, habitTimeTitleLabel, habitSelectedTime, dateValue, timePicker, deleteHabitButton)
+        habitContentView.addSubviews(habitNameTitleLabel, habitNameTextField, habitColorTitleLabel, habitColorPicker, habitTimeTitleLabel, habitSelectedTime, timePicker, deleteHabitButton)
         setupConstraints()
         self.loadViewIfNeeded()
     }
     
     @objc func saveHabit() {
-        print ("Кнопка работает!!!")
         if let currentHabit = habit {
-            currentHabit.name = habitNameTextField.text ?? "unknown"
+            currentHabit.name = habitNameTextField.text ?? Labels.unknown
             currentHabit.date = timePicker.date
             currentHabit.color = habitColorPicker.backgroundColor ?? Colors.purpleColor
             HabitsStore.shared.save()
             HabitsViewController.collectionView.reloadData()
         } else {
-            let newHabit = Habit(name: habitNameTextField.text ?? "unknown",
+            let newHabit = Habit(name: habitNameTextField.text ?? Labels.unknown,
                                  date: timePicker.date,
                                  color: habitColorPicker.backgroundColor ?? Colors.purpleColor)
             if HabitsStore.shared.habits.contains(newHabit) == false {
@@ -216,14 +192,14 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func removeHabit(sender: UIButton!) {
-        let name = habit?.name ?? "unknown"
+        let name = habit?.name ?? Labels.unknown
         let alertController = UIAlertController(
-            title: "Удалить привычку",
+            title: Labels.alertDelete,
             message: "Вы хотите удалить привычку \(name)?",
             preferredStyle: .alert)
         
-        let acceptAction = UIAlertAction(title: "Отмена", style: .default) { (_) -> Void in }
-        let declineAction = UIAlertAction(title: "Удалить", style: .destructive) { (_) -> Void in
+        let acceptAction = UIAlertAction(title: Labels.cancelLabel, style: .default) { (_) -> Void in }
+        let declineAction = UIAlertAction(title: Labels.deleteLabel, style: .destructive) { (_) -> Void in
             if let removingHabit = self.habit {
                 HabitsStore.shared.habits.removeAll(where: {$0 == removingHabit})
                 HabitsViewController.collectionView.reloadData()
@@ -275,10 +251,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
             
             habitSelectedTime.topAnchor.constraint(equalTo: habitTimeTitleLabel.bottomAnchor, constant: Constants.inset),
             habitSelectedTime.leadingAnchor.constraint(equalTo: habitContentView.leadingAnchor, constant: Constants.leadingMargin),
-            
-            dateValue.topAnchor.constraint(equalTo: habitTimeTitleLabel.bottomAnchor, constant: Constants.inset),
-            dateValue.leadingAnchor.constraint(equalTo: habitSelectedTime.trailingAnchor, constant: Constants.inset),
-            
+                        
             timePicker.topAnchor.constraint(equalTo: habitSelectedTime.bottomAnchor, constant: Constants.leadingMargin),
             timePicker.leadingAnchor.constraint(equalTo: habitContentView.leadingAnchor, constant: Constants.leadingMargin),
             timePicker.trailingAnchor.constraint(equalTo: habitContentView.trailingAnchor, constant: Constants.trailingMargin),
@@ -297,7 +270,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         label.toAutoLayout()
         label.text = title
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.font = Fonts.footnoteFont
         label.numberOfLines = 1
         return label
     }
@@ -310,14 +283,14 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
 
     @objc func saveButtonEnable() {
         if habitNameTextField.text?.isEmpty == true || equotable() == true {
-            rightBarButtonItem.isEnabled = false
+            navigationItem.rightBarButtonItem?.isEnabled = false
         } else {
-            rightBarButtonItem.isEnabled = true
+            navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
     
     @objc func timeChanged () {
-        view.layoutIfNeeded()
+        habitSelectedTime.layoutIfNeeded()
         saveButtonEnable()
     }
 }

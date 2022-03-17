@@ -28,7 +28,7 @@ class InfoViewController: UIViewController {
         label.text = "Привычка за 21 день"
         label.numberOfLines = 1
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = Fonts.title3Font
         return label
     }()
     
@@ -36,7 +36,7 @@ class InfoViewController: UIViewController {
         let textView = UITextView()
         textView.toAutoLayout()
         textView.text = InfoDescription.placeholder
-        textView.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        textView.font = Fonts.bodyFont
         textView.textColor = .black
         textView.isScrollEnabled = false
         return textView

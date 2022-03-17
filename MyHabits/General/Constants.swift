@@ -8,6 +8,16 @@
 import Foundation
 import UIKit
 
+public struct Fonts {
+    static let title3Font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+    static let headlineFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    static let bodyFont = UIFont.systemFont(ofSize: 17, weight: .regular)
+    static let footnoteBoldFont = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    static let footnoteStatusFont = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    static let footnoteFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+    static let captionFont = UIFont.systemFont(ofSize: 12, weight: .regular)
+}
+
 public struct Colors {
     static let lightGrayColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
     static var purpleColor = UIColor(red: 161/255, green: 22/255, blue: 204/255, alpha: 1)
@@ -20,11 +30,25 @@ public struct Colors {
 
 public struct Labels {
     
-    static let habitsNavigationControllerTitle = "Сегодня"
-    static let infoNavigationControllerTitle = "Информация"
+    static let today = "Сегодня"
+    static let yesterday = "Вчера"
+    static let beforeYesterday = "Позавчера"
     
-    static let habitsTabBarTitle = "Привычки"
-    static let infoTabBarTitle = "Информация"
+    static let info = "Информация"
+        static let habitsTabBarTitle = "Привычки"
+    
+    static let createLabel = "Создать"
+    static let saveLabel = "Сохранить"
+    static let cancelLabel = "Отменить"
+    static let deleteLabel = "Удалить"
+    static let nameLabel = "НАЗВАНИЕ"
+    static let colorLabel = "ТЕКСТ"
+    static let timeLabel = "ВРЕМЯ"
+    static let everyDay = "Каждый день в"
+    static let habitNamePlaceholder = "Бегать по утрам, спать 8 часов и т.п."
+    static let motivation = "Всё получится!"
+    static let unknown = "unknown"
+    static let alertDelete = "Удалить привычку"
 }
 
 public struct InfoDescription {
@@ -38,10 +62,12 @@ public struct Constants {
     static let indent: CGFloat = 12
     static let inset: CGFloat = 8
     
+    static let topSectionInset: CGFloat = 22
     static let heightOfInformationTitle: CGFloat = 40
     static let heightOfTimePicker: CGFloat = 200
     static let colorPickerSide: CGFloat = 30
-
+    static let heightFor0Section: CGFloat = 60
+    static let heightFor1Section: CGFloat = 130
 }
 
 public extension UIView {

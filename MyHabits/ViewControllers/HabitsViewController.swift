@@ -10,21 +10,22 @@ import UIKit
 class HabitsViewController: UIViewController {
     
     // MARK: PROPERTIES ============================================================================
-
-    let store = HabitsStore.shared
     
     var habit: Habit?
     
     static var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 12
+        layout.minimumLineSpacing = Constants.indent
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 22, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: Constants.topSectionInset, left: 0, bottom: 0, right: 0)
         return layout
     }()
     
     static var collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: HabitsViewController.layout)
+        let collection = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: HabitsViewController.layout
+        )
         collection.backgroundColor = Colors.lightGrayColor
         collection.toAutoLayout()
         collection.register(
@@ -85,7 +86,7 @@ extension HabitsViewController: UICollectionViewDataSource {
         case 0:
             sectionsCount = 1
         case 1:
-            sectionsCount = store.habits.count
+            sectionsCount = HabitsStore.shared.habits.count
         default:
             break
         }
@@ -100,7 +101,7 @@ extension HabitsViewController: UICollectionViewDataSource {
             return cell
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as? HabitCollectionViewCell else { return UICollectionViewCell() }
-            cell.setConfigureOfCell(habit: store.habits[indexPath.row])
+            cell.setConfigureOfCell(habit: HabitsStore.shared.habits[indexPath.row])
             return cell
         default:
             return UICollectionViewCell()
@@ -122,9 +123,9 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
         var height: CGFloat = 0
         switch indexPath.section {
         case 0:
-            height = 60
+            height = Constants.heightFor0Section
         case 1:
-            height = 130
+            height = Constants.heightFor1Section
         default:
             break
         }

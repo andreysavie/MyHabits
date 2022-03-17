@@ -14,14 +14,14 @@ class HabitDetailTableViewCell: UITableViewCell {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = Fonts.title3Font
         return label
     }()
     
     lazy var checker: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = Fonts.title3Font
         label.textColor = Colors.purpleColor
         label.text = "✔︎"
         return label
@@ -31,7 +31,6 @@ class HabitDetailTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         contentView.addSubviews(dateLabel, checker)
         setupConstraints()
     }
@@ -59,11 +58,11 @@ class HabitDetailTableViewCell: UITableViewCell {
         
         if let day = today.day {
             if day == trackedDay.day {
-                dateLabel.text = "Сегодня"
+                dateLabel.text = Labels.today
             } else if day - 1 == trackedDay.day {
-                dateLabel.text = "Вчера"
+                dateLabel.text = Labels.yesterday
             } else if day - 2 == trackedDay.day {
-                dateLabel.text = "Позавчера"
+                dateLabel.text = Labels.beforeYesterday
             } else {
                 let dateformat = DateFormatter()
                 dateformat.locale = Locale(identifier: "ru_RU")

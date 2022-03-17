@@ -41,17 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             title: Labels.habitsTabBarTitle,
             image: UIImage(systemName: "rectangle.grid.1x2"),
             selectedImage: UIImage(systemName: "rectangle.grid.1x2.fill"))
-        habitsNavigationController.navigationBar.topItem?.title = Labels.habitsNavigationControllerTitle
+        habitsNavigationController.navigationBar.topItem?.title = Labels.today
         habitsNavigationController.navigationBar.barTintColor = Colors.navigationBarColor
         habitsNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
         habitsNavigationController.navigationBar.scrollEdgeAppearance = habitsNavigationController.navigationBar.standardAppearance
         habitsNavigationController.navigationBar.topItem?.rightBarButtonItem?.tintColor = Colors.purpleColor
         
         infoNavigationController.tabBarItem = UITabBarItem(
-            title: Labels.infoTabBarTitle,
+            title: Labels.info,
             image: UIImage(systemName: "info.circle"),
             selectedImage: UIImage(systemName:"info.circle.fill"))
-        infoNavigationController.navigationBar.topItem?.title = Labels.infoNavigationControllerTitle
+        infoNavigationController.navigationBar.topItem?.title = Labels.info
         infoNavigationController.navigationBar.barTintColor = Colors.navigationBarColor
         infoNavigationController.navigationBar.standardAppearance = appearanceNavigationBar
         infoNavigationController.navigationBar.scrollEdgeAppearance = infoNavigationController.navigationBar.standardAppearance
