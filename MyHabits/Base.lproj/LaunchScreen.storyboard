@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Main_icon" width="60" height="60"/>
+        <image name="Main_icon" width="120" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
