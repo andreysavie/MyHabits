@@ -52,26 +52,8 @@ class HabitDetailTableViewCell: UITableViewCell {
         ])
     }
     
-    func setConfigureOfCell(date: Date, check: Bool) {
-        let today = Calendar.current.dateComponents([.day], from: Date())
-        let trackedDay = Calendar.current.dateComponents([.day], from: date)
-        
-        if let day = today.day {
-            if day == trackedDay.day {
-                dateLabel.text = Labels.today
-            } else if day - 1 == trackedDay.day {
-                dateLabel.text = Labels.yesterday
-            } else if day - 2 == trackedDay.day {
-                dateLabel.text = Labels.beforeYesterday
-            } else {
-                let dateformat = DateFormatter()
-                dateformat.locale = Locale(identifier: "ru_RU")
-                dateformat.dateFormat = "dd MMMM yyyy"
-                dateLabel.text = dateformat.string(from: date)
-            }
-        } else {
-            dateLabel.text = "Не удалось определить день события"
-        }
+    func setConfigureOfCell(index: Int, check: Bool) {      
+        dateLabel.text = HabitsStore.shared.trackDateString(forIndex: index)
         checker.isHidden = !check
     }
 }

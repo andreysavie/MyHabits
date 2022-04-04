@@ -9,15 +9,17 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    
     // MARK: PROPERTIES ============================================================================
 
     var habit: Habit?
-    
+    var habitCheckerAction: (()->())?
+        
     private lazy var habitNameLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.textAlignment = .left
         label.font = Fonts.headlineFont
+        label.numberOfLines = 0
         return label
     }()
     
@@ -38,7 +40,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         label.font = Fonts.footnoteFont
         return label
     }()
-    private lazy var checker: UIButton = {
+    lazy var checker: UIButton = {
         let button = UIButton()
         button.toAutoLayout()
         button.setImage(UIImage(systemName: "checkmark.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
@@ -81,25 +83,29 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            habitNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
             habitNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            
-            habitSelectedTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            habitNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+             
             habitSelectedTimeLabel.topAnchor.constraint(equalTo: habitNameLabel.bottomAnchor, constant: 4),
-            
+            habitSelectedTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+             
+             checker.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+             checker.leadingAnchor.constraint(equalTo: habitNameLabel.trailingAnchor, constant: 40),
+             checker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
+             checker.widthAnchor.constraint(equalToConstant: 36),
+             checker.heightAnchor.constraint(equalToConstant: 36),
+             
+            habitCounter.topAnchor.constraint(equalTo: checker.bottomAnchor, constant: 20),
             habitCounter.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            habitCounter.topAnchor.constraint(equalTo: habitSelectedTimeLabel.bottomAnchor, constant: 30),
-            
-            checker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -26),
-            checker.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            checker.widthAnchor.constraint(equalToConstant: 36),
-            checker.heightAnchor.constraint(equalToConstant: 36),
+            habitCounter.trailingAnchor.constraint(equalTo: checker.leadingAnchor, constant: -40)
+
         ])
     }
     
     @objc func tapOnChecker() {
         guard let trackedHabit = habit else { return }
-            HabitsStore.shared.track(trackedHabit)
-            HabitsViewController.collectionView.reloadData()
-        }
+        HabitsStore.shared.track(trackedHabit)
+        habitCheckerAction?()
+    }
 }

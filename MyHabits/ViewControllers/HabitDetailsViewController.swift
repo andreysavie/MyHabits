@@ -21,8 +21,6 @@ class HabitDetailsViewController: UIViewController {
         table.toAutoLayout()
         table.separatorInset = .zero
         table.rowHeight = UITableView.automaticDimension
-        table.refreshControl?.addTarget(self, action: #selector(updateTable), for: .valueChanged)
-        table.refreshControl = UIRefreshControl()
         return table
     }()
 
@@ -77,13 +75,8 @@ class HabitDetailsViewController: UIViewController {
     @objc func editHabit() {
         navigationController?.pushViewController(HabitViewController(habit), animated: true)
     }
-
-    @objc func updateTable() {
-        HabitDetailsViewController.tableView.reloadData()
-        HabitDetailsViewController.tableView.refreshControl?.endRefreshing()
-    }
     
-    private func setBarButton (title: String, action: Selector) -> UIBarButtonItem {
+    private func setBarButton(title: String, action: Selector) -> UIBarButtonItem {
         let button = UIBarButtonItem  (
             title: title,
             style: .plain ,
@@ -100,12 +93,12 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HabitDetailTableViewCell.self), for: indexPath) as? HabitDetailTableViewCell else { return UITableViewCell() }
         let date = HabitsStore.shared.dates[indexPath.row]
-        cell.setConfigureOfCell(date: date, check: HabitsStore.shared.habit(habit, isTrackedIn: date))
+        cell.setConfigureOfCell(index: indexPath.row, check: HabitsStore.shared.habit(habit, isTrackedIn: date))
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        HabitsStore.shared.dates.count
+        return HabitsStore.shared.dates.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

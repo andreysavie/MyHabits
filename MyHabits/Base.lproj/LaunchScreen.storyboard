@@ -34,7 +34,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SdX-Q0-Jqy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Aqm-j9-ode"/>
-                            <constraint firstItem="SdX-Q0-Jqy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OR0-82-1M0"/>
                             <constraint firstItem="kV0-AP-jaW" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ePg-Vy-XqI"/>
                             <constraint firstItem="kV0-AP-jaW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="mZV-Ke-HNX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SdX-Q0-Jqy" secondAttribute="bottom" constant="50" id="suQ-vr-REv"/>

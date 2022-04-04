@@ -12,7 +12,9 @@ class InfoViewController: UIViewController {
     // MARK: PROPERTIES ============================================================================
 
     private lazy var infoScrollView: UIScrollView = {
-        let scrollVIew = UIScrollView(frame: self.view.bounds)
+//        let scrollVIew = UIScrollView(frame: self.view.bounds)
+        let scrollVIew = UIScrollView()
+        scrollVIew.translatesAutoresizingMaskIntoConstraints = false
         return scrollVIew
     }()
     
@@ -39,6 +41,8 @@ class InfoViewController: UIViewController {
         textView.font = Fonts.bodyFont
         textView.textColor = .black
         textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = false
         return textView
     }()
  
@@ -58,6 +62,11 @@ class InfoViewController: UIViewController {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            
+            infoScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            infoScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            infoScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
             contentView.topAnchor.constraint(equalTo: infoScrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor),

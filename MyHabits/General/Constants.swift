@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 public struct Fonts {
     static let title3Font = UIFont.systemFont(ofSize: 20, weight: .semibold)
     static let headlineFont = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -42,9 +43,9 @@ public struct Labels {
     static let cancelLabel = "Отменить"
     static let deleteLabel = "Удалить"
     static let nameLabel = "НАЗВАНИЕ"
-    static let colorLabel = "ТЕКСТ"
+    static let colorLabel = "ЦВЕТ"
     static let timeLabel = "ВРЕМЯ"
-    static let everyDay = "Каждый день в"
+    static let everyDay = "Каждый день в "
     static let habitNamePlaceholder = "Бегать по утрам, спать 8 часов и т.п."
     static let motivation = "Всё получится!"
     static let unknown = "unknown"
@@ -63,6 +64,7 @@ public struct Constants {
     static let inset: CGFloat = 8
     
     static let topSectionInset: CGFloat = 22
+    static let bottomSectionInset: CGFloat = 12
     static let heightOfInformationTitle: CGFloat = 40
     static let heightOfTimePicker: CGFloat = 200
     static let colorPickerSide: CGFloat = 30

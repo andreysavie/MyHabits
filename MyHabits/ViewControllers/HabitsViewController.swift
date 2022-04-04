@@ -9,6 +9,8 @@ import UIKit
 
 class HabitsViewController: UIViewController {
     
+ 
+    
     // MARK: PROPERTIES ============================================================================
     
     var habit: Habit?
@@ -17,11 +19,11 @@ class HabitsViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = Constants.indent
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: Constants.topSectionInset, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: Constants.topSectionInset, left: 0, bottom: Constants.bottomSectionInset, right: 0)
         return layout
     }()
     
-    static var collectionView: UICollectionView = {
+    var collectionView: UICollectionView = {
         let collection = UICollectionView(
             frame: .zero,
             collectionViewLayout: HabitsViewController.layout
@@ -45,31 +47,31 @@ class HabitsViewController: UIViewController {
             image: UIImage(systemName: "plus"),
             style: .plain ,
             target: self,
-            action: #selector(addNewHabbit))
+            action: #selector(addNewHabit))
         rightBarButtonItem.tintColor = Colors.purpleColor
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        HabitsViewController.collectionView.dataSource = self
-        HabitsViewController.collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         setupContent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        HabitsViewController.collectionView.reloadData()
+        collectionView.reloadData()
     }
 
     // MARK: METHODS ===================================================================================
 
     private func setupContent() {
-        view.addSubview(HabitsViewController.collectionView)
+        view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            HabitsViewController.collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            HabitsViewController.collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            HabitsViewController.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            HabitsViewController.collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
-    @objc func addNewHabbit() {
+    @objc func addNewHabit() {
         navigationController?.pushViewController(HabitViewController(nil), animated: true)
     }
 }
@@ -102,6 +104,11 @@ extension HabitsViewController: UICollectionViewDataSource {
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HabitCollectionViewCell.self), for: indexPath) as? HabitCollectionViewCell else { return UICollectionViewCell() }
             cell.setConfigureOfCell(habit: HabitsStore.shared.habits[indexPath.row])
+            
+            cell.habitCheckerAction = { [weak self] in
+                self?.collectionView.reloadData()
+            }
+            
             return cell
         default:
             return UICollectionViewCell()

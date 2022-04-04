@@ -15,6 +15,15 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     var habit: Habit?
     var habitName: String = ""
     
+    var currentTime: String {
+        get {
+            let date = timePicker.date
+            let time = DateFormatter()
+            time.dateFormat = "HH:mm"
+            return time.string(from: date)
+        }
+    }
+    
     //MARK: LABELS
     private lazy var habitNameTitleLabel = habitLabel(Labels.nameLabel)
     private lazy var habitColorTitleLabel = habitLabel(Labels.colorLabel)
@@ -37,7 +46,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     private lazy var habitSelectedTime: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.text = habit?.dateString
+        label.text = habit?.dateString ?? "\(Labels.everyDay)\(currentTime)"
         label.textColor = .black
         label.font = Fonts.bodyFont
         return label
@@ -159,7 +168,8 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         self.habit = habit
         self.habitNameTextField.text = habit.name
         self.habitColorPicker.backgroundColor = habit.color
-        self.habitSelectedTime.text = habit.dateString
+//        self.habitSelectedTime.text = habit.dateString
+
         self.timePicker.date = habit.date
     }
     
@@ -178,14 +188,12 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
             currentHabit.date = timePicker.date
             currentHabit.color = habitColorPicker.backgroundColor ?? Colors.purpleColor
             HabitsStore.shared.save()
-            HabitsViewController.collectionView.reloadData()
         } else {
             let newHabit = Habit(name: habitNameTextField.text ?? Labels.unknown,
                                  date: timePicker.date,
                                  color: habitColorPicker.backgroundColor ?? Colors.purpleColor)
             if HabitsStore.shared.habits.contains(newHabit) == false {
                 HabitsStore.shared.habits.append(newHabit)
-                HabitsViewController.collectionView.reloadData()
             }
         }
         navigationController?.popToRootViewController(animated: true)
@@ -202,7 +210,6 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         let declineAction = UIAlertAction(title: Labels.deleteLabel, style: .destructive) { (_) -> Void in
             if let removingHabit = self.habit {
                 HabitsStore.shared.habits.removeAll(where: {$0 == removingHabit})
-                HabitsViewController.collectionView.reloadData()
             }
             self.navigationController?.popToRootViewController(animated: true)
         }
@@ -218,6 +225,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     @objc func openColorPickerViewController() {
         let picker = UIColorPickerViewController()
         picker.delegate = self
+        picker.selectedColor = habitColorPicker.backgroundColor ?? Colors.purpleColor
         present(picker, animated: true)
     }
     
@@ -290,7 +298,7 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func timeChanged () {
-        habitSelectedTime.layoutIfNeeded()
+        habitSelectedTime.text = "\(Labels.everyDay)\(currentTime)"
         saveButtonEnable()
     }
 }

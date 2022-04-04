@@ -13,7 +13,6 @@
 		D5300FC527DCD3FF00139CE8 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5300FC427DCD3FF00139CE8 /* HabitViewController.swift */; };
 		D5300FC727DCD6BC00139CE8 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5300FC627DCD6BC00139CE8 /* HabitDetailsViewController.swift */; };
 		D576D17527DA3E82007D1970 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576D17427DA3E82007D1970 /* AppDelegate.swift */; };
-		D576D17F27DA3E82007D1970 /* MyHabits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D576D17D27DA3E82007D1970 /* MyHabits.xcdatamodeld */; };
 		D576D18127DA3E86007D1970 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D576D18027DA3E86007D1970 /* Assets.xcassets */; };
 		D576D18427DA3E86007D1970 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D576D18227DA3E86007D1970 /* LaunchScreen.storyboard */; };
 		D576D18C27DA41A2007D1970 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D576D18B27DA41A2007D1970 /* HabitsStore.swift */; };
@@ -30,7 +29,6 @@
 		D5300FC627DCD6BC00139CE8 /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		D576D17127DA3E82007D1970 /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D576D17427DA3E82007D1970 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D576D17E27DA3E82007D1970 /* MyHabits.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyHabits.xcdatamodel; sourceTree = "<group>"; };
 		D576D18027DA3E86007D1970 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D576D18327DA3E86007D1970 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D576D18527DA3E86007D1970 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				D576D18027DA3E86007D1970 /* Assets.xcassets */,
 				D576D18227DA3E86007D1970 /* LaunchScreen.storyboard */,
 				D576D18527DA3E86007D1970 /* Info.plist */,
-				D576D17D27DA3E82007D1970 /* MyHabits.xcdatamodeld */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -194,7 +191,6 @@
 				D576D17527DA3E82007D1970 /* AppDelegate.swift in Sources */,
 				D576D19027DA4350007D1970 /* InfoViewController.swift in Sources */,
 				D5300FC727DCD6BC00139CE8 /* HabitDetailsViewController.swift in Sources */,
-				D576D17F27DA3E82007D1970 /* MyHabits.xcdatamodeld in Sources */,
 				D527E13B27DE8AD9008C43B0 /* ProgressCollectionViewCell.swift in Sources */,
 				D576D18C27DA41A2007D1970 /* HabitsStore.swift in Sources */,
 				D5300FC527DCD3FF00139CE8 /* HabitViewController.swift in Sources */,
@@ -349,7 +345,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +374,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -414,19 +410,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D576D17D27DA3E82007D1970 /* MyHabits.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D576D17E27DA3E82007D1970 /* MyHabits.xcdatamodel */,
-			);
-			currentVersion = D576D17E27DA3E82007D1970 /* MyHabits.xcdatamodel */;
-			path = MyHabits.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D576D16927DA3E81007D1970 /* Project object */;
 }
