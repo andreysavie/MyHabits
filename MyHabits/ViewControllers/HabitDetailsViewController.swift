@@ -13,8 +13,8 @@ class HabitDetailsViewController: UIViewController {
 
     let habit: Habit
 
-    private lazy var rightBarButtonItem = setBarButton(title: "Править", action: #selector(editHabit))
-    private lazy var leftBarButtonItem = setBarButton(title: "❮ Сегодня", action: #selector(tapToCancel))
+    private lazy var rightBarButtonItem = setBarButton(title: Labels.edit, action: #selector(editHabit))
+    private lazy var leftBarButtonItem = setBarButton(title: Labels.todayBack, action: #selector(tapToCancel))
 
     static let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped )
@@ -106,7 +106,7 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "  АКТИВНОСТЬ"
+        return Labels.activityLabel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

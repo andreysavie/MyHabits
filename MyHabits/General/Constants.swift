@@ -42,9 +42,12 @@ public struct Labels {
     static let saveLabel = "Сохранить"
     static let cancelLabel = "Отменить"
     static let deleteLabel = "Удалить"
+    static let edit = "Править"
+    static let todayBack = "❮ Сегодня"
     static let nameLabel = "НАЗВАНИЕ"
     static let colorLabel = "ЦВЕТ"
     static let timeLabel = "ВРЕМЯ"
+    static let activityLabel = "  АКТИВНОСТЬ"
     static let everyDay = "Каждый день в "
     static let habitNamePlaceholder = "Бегать по утрам, спать 8 часов и т.п."
     static let motivation = "Всё получится!"
@@ -68,8 +71,19 @@ public struct Constants {
     static let heightOfInformationTitle: CGFloat = 40
     static let heightOfTimePicker: CGFloat = 200
     static let colorPickerSide: CGFloat = 30
+    static let checkerSide: CGFloat = 36
     static let heightFor0Section: CGFloat = 60
     static let heightFor1Section: CGFloat = 130
+    
+    static let collectionViewCellIndent: CGFloat = 20
+    static let collectionViewCellBackIndent: CGFloat = -20
+    static let collectionViewCellDoubleIndent: CGFloat = 40
+    static let collectionViewCellDoubleBackIndent: CGFloat = -20
+    static let collectionViewCellInset: CGFloat = 4
+    static let collectionViewCellTrailingMargin: CGFloat = -25
+
+
+
 }
 
 public extension UIView {

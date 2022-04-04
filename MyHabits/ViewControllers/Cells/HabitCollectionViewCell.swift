@@ -11,10 +11,10 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     
     // MARK: PROPERTIES ============================================================================
-
+    
     var habit: Habit?
     var habitCheckerAction: (()->())?
-        
+    
     private lazy var habitNameLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
@@ -50,7 +50,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }()
     
     // MARK: INITIALIZATORS ============================================================================
-
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.backgroundColor = .white
@@ -62,7 +62,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: METHODS ===================================================================================
-
+    
     public func setConfigureOfCell(habit: Habit) {
         self.habit = habit
         habitNameLabel.text = habit.name
@@ -84,22 +84,21 @@ class HabitCollectionViewCell: UICollectionViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            habitNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            habitNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-             
-            habitSelectedTimeLabel.topAnchor.constraint(equalTo: habitNameLabel.bottomAnchor, constant: 4),
-            habitSelectedTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-             
-             checker.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-             checker.leadingAnchor.constraint(equalTo: habitNameLabel.trailingAnchor, constant: 40),
-             checker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
-             checker.widthAnchor.constraint(equalToConstant: 36),
-             checker.heightAnchor.constraint(equalToConstant: 36),
-             
-            habitCounter.topAnchor.constraint(equalTo: checker.bottomAnchor, constant: 20),
-            habitCounter.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            habitCounter.trailingAnchor.constraint(equalTo: checker.leadingAnchor, constant: -40)
-
+            habitNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.collectionViewCellIndent),
+            habitNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.collectionViewCellIndent),
+            
+            habitSelectedTimeLabel.topAnchor.constraint(equalTo: habitNameLabel.bottomAnchor, constant: Constants.collectionViewCellInset),
+            habitSelectedTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.collectionViewCellIndent),
+            
+            checker.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            checker.leadingAnchor.constraint(equalTo: habitNameLabel.trailingAnchor, constant: Constants.collectionViewCellDoubleIndent),
+            checker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.collectionViewCellTrailingMargin),
+            checker.widthAnchor.constraint(equalToConstant: Constants.checkerSide),
+            checker.heightAnchor.constraint(equalToConstant: Constants.checkerSide),
+            
+            habitCounter.topAnchor.constraint(equalTo: checker.bottomAnchor, constant: Constants.collectionViewCellIndent),
+            habitCounter.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.collectionViewCellIndent),
+            habitCounter.trailingAnchor.constraint(equalTo: checker.leadingAnchor, constant: Constants.collectionViewCellDoubleBackIndent)
         ])
     }
     

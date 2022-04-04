@@ -58,7 +58,8 @@ class ProgressCollectionViewCell: UICollectionViewCell {
 
     func setupContent() {
         contentView.addSubviews(progressNameLabel, progressProcentLabel, progressLine)
-        progressLine.progress = HabitsStore.shared.todayProgress
+//        progressLine.progress = HabitsStore.shared.todayProgress
+        progressLine.setProgress(HabitsStore.shared.todayProgress, animated: true)
         progressProcentLabel.text = String(Int(HabitsStore.shared.todayProgress * 100)) + "%"        
         setupConstraints()
     }
