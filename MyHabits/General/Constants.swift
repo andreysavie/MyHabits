@@ -42,7 +42,7 @@ public struct Labels {
     static let saveLabel = "Сохранить"
     static let cancelLabel = "Отменить"
     static let deleteLabel = "Удалить"
-    static let edit = "Править"
+    static let editLabel = "Править"
     static let todayBack = "❮ Сегодня"
     static let nameLabel = "НАЗВАНИЕ"
     static let colorLabel = "ЦВЕТ"

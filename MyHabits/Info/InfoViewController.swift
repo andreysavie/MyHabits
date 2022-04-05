@@ -12,7 +12,6 @@ class InfoViewController: UIViewController {
     // MARK: PROPERTIES ============================================================================
 
     private lazy var infoScrollView: UIScrollView = {
-//        let scrollVIew = UIScrollView(frame: self.view.bounds)
         let scrollVIew = UIScrollView()
         scrollVIew.translatesAutoresizingMaskIntoConstraints = false
         return scrollVIew

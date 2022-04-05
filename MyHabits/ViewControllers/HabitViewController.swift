@@ -122,7 +122,9 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         habitNameTextField.delegate = self
-        title = Labels.createLabel
+        
+        title = (habit == nil) ? Labels.createLabel : Labels.editLabel
+        
         view.backgroundColor = .white
         
         let leftBarButtonItem = UIBarButtonItem(
@@ -168,8 +170,6 @@ class HabitViewController: UIViewController, UITextFieldDelegate {
         self.habit = habit
         self.habitNameTextField.text = habit.name
         self.habitColorPicker.backgroundColor = habit.color
-//        self.habitSelectedTime.text = habit.dateString
-
         self.timePicker.date = habit.date
     }
     

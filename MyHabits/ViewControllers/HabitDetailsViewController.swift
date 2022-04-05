@@ -13,7 +13,7 @@ class HabitDetailsViewController: UIViewController {
 
     let habit: Habit
 
-    private lazy var rightBarButtonItem = setBarButton(title: Labels.edit, action: #selector(editHabit))
+    private lazy var rightBarButtonItem = setBarButton(title: Labels.editLabel, action: #selector(editHabit))
     private lazy var leftBarButtonItem = setBarButton(title: Labels.todayBack, action: #selector(tapToCancel))
 
     static let tableView: UITableView = {
